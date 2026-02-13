@@ -1,0 +1,26 @@
+fieldset {
+  label {
+    background: #eee;
+    border: 1px solid gray;
+    display: inline-block;
+    padding: .9rem .2rem;
+    margin: .5rem;
+    min-width: 8rem;
+  }
+}
+
+button {
+  font-size: inherit;
+  padding: .5rem 1rem;
+}
+
+form {
+  font-size: x-large;
+}
+
+body {
+  font-family: sans-serif;
+  margin: auto;
+  max-width: 34rem;
+  padding: 0 1rem;
+}

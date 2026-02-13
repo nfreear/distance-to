@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style/app.css">
+
+<title>Geolocation test</title>
+
+<h1>Geolocation test</h1>
+
+<form id="form">
+  <p><output name="output">-</output></p>
+
+  <fieldset name="fs">
+    <legend>Places</legend>
+
+    <label><input type="radio" name="place" value="MKC"> MKC</label>
+    <label><input type="radio" name="place" value="Leeds"> Leeds</label>
+    <label><input type="radio" name="place" value="EUS"> Euston Station</label>
+    <label><input type="radio" name="place" value="Tamworth"> Tamworth</label>
+  </fieldset>
+
+  <p><button name="startButton">Start</button></p>
+</form>
+
+<script type="module" src="./lib/app.js"></script>
+
+</html>

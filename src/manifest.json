@@ -1,0 +1,12 @@
+{
+  "name": "distance-to",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "lib/icon.svg",
+      "sizes": "144x144",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": "./"
+}

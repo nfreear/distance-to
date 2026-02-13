@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "servor": "^4.0.2"
+  },
+  "scripts": {
+    "start": "cd src && npx servor",
+    "lint": "npx eslint",
+    "lint:fix": "npx eslint --fix ./src/leaflet/"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.2",
+    "neostandard": "^0.12.2"
+  }
+}

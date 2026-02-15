@@ -10,6 +10,8 @@ import urlsToCache from './lib/urlsToCache.js';
 const { caches, self } = globalThis;
 const cacheName = 'distance-to-app-cache';
 
+let clientId;
+
 self.addEventListener('install', (event) => {
   console.warn('Distance To App: install.', cacheName, event);
 
@@ -26,6 +28,8 @@ self.addEventListener('install', (event) => {
 // https://dev.to/buildwebcrumbs/why-your-website-should-work-offline-and-what-you-should-do-about-it-fck
 // https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent/respondWith
 self.addEventListener('fetch', (event) => {
+  clientId = event.clientId;
+
   // Prevent the default, and handle the request ourselves.
   event.respondWith(
     (async () => {
@@ -33,6 +37,7 @@ self.addEventListener('fetch', (event) => {
       const cachedResponse = await caches.match(event.request);
       // Return it if we found one.
       if (cachedResponse) {
+        // clientId: 85c37f1a-9622-4930-b95f-89ca23eae578
         console.debug('sw.js ~ Cache hit - return response'); //, event.request.url);
         return cachedResponse;
       }
@@ -56,8 +61,13 @@ self.addEventListener('message', async (event) => {
 
   const promises = responses.map(({ url }) => cache.delete(url));
 
-  Promise.all(promises).then(() => {
-    console.debug('sw.js ~ Cache:delete:', responses, event);
+  Promise.all(promises).then(async () => {
+    console.debug('sw.js ~ Cache:delete:', clientId, responses, event);
+
+    const client = await self.clients.get(clientId);
+    if (client) {
+      client.postMessage('cache:delete:ok');
+    }
   });
 });
 

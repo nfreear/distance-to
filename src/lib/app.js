@@ -7,7 +7,7 @@
 import DistanceToAppElement from './DistanceToAppElement.js';
 import LoadPlaceDataElement from './LoadPlaceDataElement.js';
 
-const { customElements } = window;
+const { confirm, customElements } = window;
 const deleteButton = document.querySelector('#deleteButton');
 
 customElements.define('distance-to-app', DistanceToAppElement);
@@ -30,10 +30,16 @@ if ('serviceWorker' in navigator) {
         });
 
         deleteButton.addEventListener('click', (ev) => {
-          registration.active.postMessage('cache:delete');
+          if (confirm('Are you sure you want to delete the cache?')) {
+            registration.active.postMessage('cache:delete');
+          }
         });
 
         console.warn('Distance To App: service-worker.js registered OK!', registration);
       });
+  });
+
+  navigator.serviceWorker.addEventListener('message', (ev) => {
+    console.debug('app.js ~ Message:', ev);
   });
 }

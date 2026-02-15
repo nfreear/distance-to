@@ -1,11 +1,19 @@
 fieldset {
+  border: 1px dotted gray;
+  padding: 0;
+
+  x-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+
   label {
     background: #eee;
     border: 1px solid gray;
     display: inline-block;
-    padding: .9rem .2rem;
-    margin: .5rem;
-    min-width: 8rem;
+    padding: .9rem .5rem .9rem .1rem;
+    min-width: 7rem;
   }
 }
 

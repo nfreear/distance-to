@@ -2,20 +2,20 @@
 const PLACE_DATA = [
   {
     id: 'leeds',
-    address: 'Premier Inn (Elland Road), City West One Office Park, Gelderd Rd, Holbeck, Leeds, LS12 6LX',
+    address: 'New Station St, Leeds LS1 4DY',
     distanceMK: '133.01 mi (214.06 km)',
-    latlng: [53.77729557185507, -1.5798559343045304]
+    latlng: [53.794417, -1.5471143]
   }, {
     id: 'eus',
     address: 'Euston Station, Euston Road, London, NW1 2RT',
     url: 'https://www.google.co.uk/maps/place/Euston+Station/@51.5281278,-0.1322402,17z/',
-    latlng: [51.5281278,-0.1322402]
+    latlng: [51.5281278, -0.1322402]
   }, {
-    id: 'mkc',
+    id: 'MKC',
     address: 'Phoenix House, Milton Keynes, MK9 1AW',
     latlng: [52.0342905, -0.7732783]
   }, {
-    id: 'tamworth',
+    id: 'Tamworth',
     distanceMK: '57.00 mi (91.74 km)',
     distanceLeeds: '86.97 mi (139.96 km)', // "127.6"
     address: 'Victoria Rd, Tamworth, B79 7JT',

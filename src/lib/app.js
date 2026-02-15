@@ -1,3 +1,9 @@
+/**
+ * Distance To Web App.
+ *
+ * @copyright ©2026 Nick Freear.
+ */
+
 import DistanceToAppElement from './DistanceToAppElement.js';
 import LoadPlaceDataElement from './LoadPlaceDataElement.js';
 

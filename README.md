@@ -9,8 +9,14 @@ A minimalist [progressive web app][] to answer this question, designed for offli
 * Web App: [nfreear.github.io/distance-to][ghp]
 * Repo: [github.com/nfreear/distance-to][repo]
 
-Uses [`LatLng`][geo] and [`EarthCRS`][geo] JS classes from [Leaflet.js][].
+Uses the following:
 
+* [`LatLng`][geo] and [`EarthCRS`][geo] JS classes from [Leaflet.js][].
+* [Geolocation API][].
+* [Haversine formula][].
+* [Caching][].
+
+[pen]: https://codepen.io/nfreear/pen/KwMbYwe
 [repo]: https://github.com/nfreear/distance-to.git
 [ghp]: https://nfreear.github.io/distance-to/
 [geo]: https://github.com/nfreear/distance-to/tree/main/src/leaflet/geo
@@ -19,3 +25,7 @@ Uses [`LatLng`][geo] and [`EarthCRS`][geo] JS classes from [Leaflet.js][].
 
 [progressive web app]: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps
 [leaflet.js]: https://github.com/leaflet/leaflet
+[leaflet ref]: https://leafletjs.com/reference-2.0.0.html#latlng
+[geolocation api]: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+[haversine formula]: https://en.wikipedia.org/wiki/Haversine_formula
+[caching]: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Caching

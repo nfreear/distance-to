@@ -3,7 +3,7 @@ import geoData from '../data/gbr-place-data.js';
 const { HTMLElement } = window;
 
 /**
- *
+ * Load Geo-data and create a radio button element for each place.
  */
 export default class LoadPlaceDataElement extends HTMLElement {
   #elements;

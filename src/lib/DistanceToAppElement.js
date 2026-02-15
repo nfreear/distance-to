@@ -6,9 +6,6 @@ const { HTMLElement, navigator } = window;
 /**
  *
  * @see https://codepen.io/nfreear/pen/KwMbYwe
- * @see https://leafletjs.com/reference-2.0.0.html#latlng - Latlng.distanceTo();
- * @see https://github.com/Leaflet/Leaflet/blob/main/src/geo/LatLng.js#L140
- * @see https://en.wikipedia.org/wiki/Haversine_formula
  */
 export default class DistanceToAppElement extends HTMLElement {
   #distanceKM;

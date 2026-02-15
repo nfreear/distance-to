@@ -8,26 +8,30 @@ fieldset {
   border: 1px dotted gray;
   padding: 0;
 
-  .display-flex,
-  x-flex {
+  .display-flex {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.2rem;
+    gap: 1.1rem;
   }
 
   label {
     background: #ddd;
     color: #222;
-    border: 1px solid gray;
+    border: 1px outset gray;
+    border-radius: .3rem;
     display: inline-block;
-    padding: .9rem .5rem .9rem .1rem;
+    padding: .9rem .4rem .9rem .1rem;
     min-width: 7rem;
 
     span {
       display: inline-block;
-      margin-left: .25rem;
+      margin-left: .2rem;
     }
   }
+}
+
+output {
+  line-height: 1.6;
 }
 
 button {
@@ -50,4 +54,9 @@ body {
   a[ href ] {
     color: var(--link-color);
   }
+}
+
+* {
+  outline-offset: .2rem;
+  text-underline-offset: .2rem;
 }

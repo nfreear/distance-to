@@ -16,7 +16,7 @@ export default class DistanceToAppElement extends HTMLElement {
   get #geoData () { return geoData; }
   get #geolocation () { return navigator.geolocation; }
 
-  get #form () { return this.querySelector('form'); }
+  get #form () { return this.querySelector('#formID'); }
   get #fieldsetElem () { return this.#form.elements.fs; }
   get #placeField () { return this.#form.elements.place; }
   get #outputElem () { return this.#form.elements.output; }
@@ -55,16 +55,20 @@ export default class DistanceToAppElement extends HTMLElement {
     this.#distanceKM = this.#format(distanceM / 1000);
     // WAS: const distanceKM = calculateDistance(fromLatlng, toLatlng);
 
-    this.#outputElem.value = `${this.#distanceKM} km (${this.#distanceMiles} miles) to ${this.#placeId}`;
+    this.#outputElem.value = `${this.#distanceKM} km (${this.#distanceMiles} miles) to ${this.#placeLabel}`;
 
     console.log('coords:', this.#distanceKM, 'km', this.#placeId, fromLatlng, date, pos);
   }
 
-  #getLatLng (placeId) {
+  #find (placeId) {
     const found = this.#geoData.find((it) => it.id.toLowerCase() === placeId.toLowerCase());
     console.assert(found, `Place not found: ${placeId}`);
-    return found.latlng;
+    return found;
   }
+
+  #getLatLng (placeId) { return this.#find(placeId).latlng; }
+
+  get #placeLabel () { return this.#find(this.#placeId).label; }
 
   /** @DEPRECATED https://www.mathsisfun.com/algebra/distance-2-points.html
   */

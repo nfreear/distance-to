@@ -8,7 +8,17 @@ const { HTMLElement } = window;
 export default class LoadPlaceDataElement extends HTMLElement {
   #elements;
 
-  get #geoData () { return geoData; }
+  get #geoData () { return geoData.sort((a, b) => this.#sortAlpha(a, b)); }
+
+  #sortAlpha (a, b) {
+    if (a.label > b.label) {
+      return 1;
+    }
+    if (a.label < b.label) {
+      return -1;
+    }
+    return 0;
+  }
 
   connectedCallback () {
     this.#elements = this.#geoData.map((it) => this.#createPlaceElement(it));
@@ -21,7 +31,7 @@ export default class LoadPlaceDataElement extends HTMLElement {
   }
 
   #createPlaceElement (place) {
-    const { id } = place;
+    const { id, label } = place;
 
     const labelElem = document.createElement('label');
     const inputElem = document.createElement('input');
@@ -31,7 +41,7 @@ export default class LoadPlaceDataElement extends HTMLElement {
     inputElem.name = 'place';
     inputElem.value = id;
 
-    textElem.textContent = id;
+    textElem.textContent = label;
 
     labelElem.appendChild(inputElem);
     labelElem.appendChild(textElem);

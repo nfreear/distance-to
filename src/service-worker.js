@@ -42,4 +42,23 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
+/**
+ * Delete the cache.
+ */
+self.addEventListener('message', async (event) => {
+  if (event.data !== 'cache:delete') {
+    console.debug('sw.js ~ Other message:', event);
+    return;
+  }
+
+  const cache = await caches.open(cacheName);
+  const responses = await cache.matchAll();
+
+  const promises = responses.map(({ url }) => cache.delete(url));
+
+  Promise.all(promises).then(() => {
+    console.debug('sw.js ~ Cache:delete:', responses, event);
+  });
+});
+
 // End.

@@ -38,13 +38,23 @@ output {
   }
 }
 
-button {
-  font-size: inherit;
-  padding: .5rem 1rem;
-}
-
 form {
   font-size: x-large;
+
+  button {
+    font-size: inherit;
+    padding: .5rem 1rem;
+  }
+}
+
+footer {
+  border-top: 1px solid gray;
+  margin-top: 2rem;
+
+  button {
+    margin-left: .6rem;
+    padding: .15rem .6rem;
+  }
 }
 
 body {

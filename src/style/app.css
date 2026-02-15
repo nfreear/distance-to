@@ -1,7 +1,14 @@
+:root {
+  --back-color: #222;
+  --fore-color: #eee;
+  --link-color: #eee;
+}
+
 fieldset {
   border: 1px dotted gray;
   padding: 0;
 
+  .display-flex,
   x-flex {
     display: flex;
     flex-wrap: wrap;
@@ -9,11 +16,17 @@ fieldset {
   }
 
   label {
-    background: #eee;
+    background: #ddd;
+    color: #222;
     border: 1px solid gray;
     display: inline-block;
     padding: .9rem .5rem .9rem .1rem;
     min-width: 7rem;
+
+    span {
+      display: inline-block;
+      margin-left: .25rem;
+    }
   }
 }
 
@@ -27,8 +40,14 @@ form {
 }
 
 body {
+  background-color: var(--back-color);
+  color: var(--fore-color);
   font-family: sans-serif;
   margin: auto;
   max-width: 34rem;
   padding: 0 1rem;
+
+  a[ href ] {
+    color: var(--link-color);
+  }
 }

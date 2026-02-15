@@ -1,8 +1,10 @@
 import DistanceToAppElement from './DistanceToAppElement.js';
+import LoadPlaceDataElement from './LoadPlaceDataElement.js';
 
 const { customElements } = window;
 
 customElements.define('distance-to-app', DistanceToAppElement);
+customElements.define('load-place-data', LoadPlaceDataElement);
 
 /**
 * @see https://developers.google.com/web/fundamentals/primers/service-workers/registration

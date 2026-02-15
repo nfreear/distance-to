@@ -7,9 +7,9 @@
 <link rel="stylesheet" href="style/app.css">
 <link rel="icon" href="lib/icon.svg">
 
-<title>Geolocation test</title>
+<title>Distance To …?</title>
 
-<h1>Geolocation test</h1>
+<h1>Distance To …?</h1>
 
 <distance-to-app>
 
@@ -19,14 +19,9 @@
   <fieldset name="fs">
     <legend>Places</legend>
 
-    <x-flex>
-
-    <label><input type="radio" name="place" value="MKC"> MKC</label>
-    <label><input type="radio" name="place" value="Leeds"> Leeds</label>
-    <label><input type="radio" name="place" value="EUS"> Euston Station</label>
-    <label><input type="radio" name="place" value="Tamworth"> Tamworth</label>
-
-    </x-flex>
+    <load-place-data class="display-flex">
+      Loading …
+    </load-place-data>
   </fieldset>
 
   <p><button name="startButton">Start</button></p>

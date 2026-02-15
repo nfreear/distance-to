@@ -11,6 +11,8 @@ const { HTMLElement, navigator } = window;
  * @see https://en.wikipedia.org/wiki/Haversine_formula
  */
 export default class DistanceToAppElement extends HTMLElement {
+  #distanceKM;
+
   get #geoData () { return geoData; }
   get #geolocation () { return navigator.geolocation; }
 
@@ -20,6 +22,9 @@ export default class DistanceToAppElement extends HTMLElement {
   get #outputElem () { return this.#form.elements.output; }
 
   get #placeId () { return this.#placeField.value; }
+
+  // https://www.wikihow.com/Convert-Kilometers-to-Miles
+  get #distanceMiles () { return this.#format(this.#distanceKM * 0.62137273664981); }
 
   connectedCallback () {
     this.#form.addEventListener('submit', (ev) => this.#submitEventHandler(ev));
@@ -47,12 +52,12 @@ export default class DistanceToAppElement extends HTMLElement {
     const toLatlng = new LatLng(this.#getLatLng(this.#placeId));
 
     const distanceM = fromLatlng.distanceTo(toLatlng);
-    const distanceKM = this.#format(distanceM / 1000);
+    this.#distanceKM = this.#format(distanceM / 1000);
     // WAS: const distanceKM = calculateDistance(fromLatlng, toLatlng);
 
-    this.#outputElem.value = `${distanceKM} km to ${this.#placeId}`;
+    this.#outputElem.value = `${this.#distanceKM} km (${this.#distanceMiles} miles) to ${this.#placeId}`;
 
-    console.log('coords:', distanceKM, 'km', this.#placeId, fromLatlng, date, pos);
+    console.log('coords:', this.#distanceKM, 'km', this.#placeId, fromLatlng, date, pos);
   }
 
   #getLatLng (placeId) {
@@ -61,7 +66,8 @@ export default class DistanceToAppElement extends HTMLElement {
     return found.latlng;
   }
 
-  // https://www.mathsisfun.com/algebra/distance-2-points.html
+  /** @DEPRECATED https://www.mathsisfun.com/algebra/distance-2-points.html
+  */
   #calculateDistance (fromLatlng, toLatlng) {
     const [xa, ya] = fromLatlng;
     const [xb, yb] = toLatlng;

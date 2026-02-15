@@ -1,12 +1,12 @@
 // https://www.distance.to/Tamworth,Staffordshire,England,GBR/Milton-Keynes,Buckinghamshire,England,GBR
 const PLACE_DATA = [
   {
-    id: 'leeds',
+    id: 'Leeds',
     address: 'New Station St, Leeds LS1 4DY',
     distanceMK: '133.01 mi (214.06 km)',
     latlng: [53.794417, -1.5471143]
   }, {
-    id: 'eus',
+    id: 'Euston',
     address: 'Euston Station, Euston Road, London, NW1 2RT',
     url: 'https://www.google.co.uk/maps/place/Euston+Station/@51.5281278,-0.1322402,17z/',
     latlng: [51.5281278, -0.1322402]

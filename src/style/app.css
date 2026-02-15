@@ -32,6 +32,10 @@ fieldset {
 
 output {
   line-height: 1.6;
+
+  &[ aria-live = off ] {
+    font-size: small;
+  }
 }
 
 button {

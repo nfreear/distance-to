@@ -2,14 +2,14 @@
 
 # Distance To …?
 
-What is the distance to XX from my current location?
+What is the distance to [_XX_] from my current location?
 
 A minimalist [progressive web app][] to answer this question, designed for offline use and for when the mobile signal is poor.
 
 * Web App: [nfreear.github.io/distance-to][ghp]
 * Repo: [github.com/nfreear/distance-to][repo]
 
-Uses [`LatLng`][geo] and [`EarthCRS`][geo] from [Leaflet.js][].
+Uses [`LatLng`][geo] and [`EarthCRS`][geo] JS classes from [Leaflet.js][].
 
 [repo]: https://github.com/nfreear/distance-to.git
 [ghp]: https://nfreear.github.io/distance-to/

@@ -6,6 +6,9 @@ const { customElements } = window;
 customElements.define('distance-to-app', DistanceToAppElement);
 customElements.define('load-place-data', LoadPlaceDataElement);
 
+document.documentElement.classList.remove('no-js');
+document.documentElement.classList.add('js');
+
 /**
 * @see https://developers.google.com/web/fundamentals/primers/service-workers/registration
 * @see https://stackoverflow.com/questions/35780397/understanding-service-worker-scope/48068714#

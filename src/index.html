@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 
@@ -16,7 +16,12 @@
 <distance-to-app role="main">
 
 <form id="formID">
-  <p><output name="output">-</output></p>
+  <p>
+    <output name="output">-</output>
+    <output name="speed" aria-live="off"></output>
+    <output name="heading" aria-live="off"></output>
+    <output name="timer" aria-live="off"></output>
+  </p>
 
   <fieldset name="fs">
     <legend>Places</legend>

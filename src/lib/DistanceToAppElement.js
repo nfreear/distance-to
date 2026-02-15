@@ -12,6 +12,8 @@ const { HTMLElement, navigator } = window;
  */
 export default class DistanceToAppElement extends HTMLElement {
   #distanceKM;
+  #timerNum = 0;
+  #timerID;
 
   get #geoData () { return geoData; }
   get #geolocation () { return navigator.geolocation; }
@@ -20,6 +22,9 @@ export default class DistanceToAppElement extends HTMLElement {
   get #fieldsetElem () { return this.#form.elements.fs; }
   get #placeField () { return this.#form.elements.place; }
   get #outputElem () { return this.#form.elements.output; }
+  get #timerElem () { return this.#form.elements.timer; }
+  get #speedElem () { return this.#form.elements.speed; }
+  get #headingElem () { return this.#form.elements.heading; }
 
   get #placeId () { return this.#placeField.value; }
 
@@ -57,7 +62,29 @@ export default class DistanceToAppElement extends HTMLElement {
 
     this.#outputElem.value = `${this.#distanceKM} km (${this.#distanceMiles} miles) to ${this.#placeLabel}`;
 
+    this.#setSpeedHeading(pos);
+    this.#runTimer();
+
     console.log('coords:', this.#distanceKM, 'km', this.#placeId, fromLatlng, date, pos);
+  }
+
+  #setSpeedHeading (pos) {
+    const { heading, speed } = pos.coords;
+
+    this.#headingElem.value = heading ?? '?'; // degrees; 0deg == North.
+    this.#speedElem.value = speed ?? '?'; // m/s.
+  }
+
+  #runTimer (intervalMS = 1000) {
+    if (this.#timerID) {
+      clearInterval(this.#timerID);
+      this.#timerNum = 0;
+    }
+    this.#timerID = setInterval(() => {
+      this.#timerNum++;
+      this.#timerElem.value = `${this.#timerNum}s`;
+    },
+    intervalMS);
   }
 
   #find (placeId) {

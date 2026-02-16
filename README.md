@@ -2,7 +2,7 @@
 
 # Distance To …?
 
-What is the distance to [_XX_] from my current location?
+What is the distance to [_X_] from my current location?
 
 A minimalist [progressive web app][] to answer this question, designed for offline use and for when the mobile signal is poor.
 
@@ -17,6 +17,8 @@ Uses the following:
 * [Caching][].
 
 [pen]: https://codepen.io/nfreear/pen/KwMbYwe
+[crosshair pen]: https://codepen.io/nfreear/pen/MYedwqM
+[compass pen]: https://codepen.io/nfreear/pen/PwzvNeE
 [repo]: https://github.com/nfreear/distance-to.git
 [ghp]: https://nfreear.github.io/distance-to/
 [geo]: https://github.com/nfreear/distance-to/tree/main/src/leaflet/geo

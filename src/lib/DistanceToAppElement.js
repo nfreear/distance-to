@@ -11,6 +11,11 @@ export default class DistanceToAppElement extends HTMLElement {
   #distanceKM;
   #timerNum = 0;
   #timerID;
+  #opt = {
+    enableHighAccuracy: false,
+    timeout: 5000,
+    maximumAge: 0,
+  };
 
   get #geoData () { return geoData; }
   get #geolocation () { return navigator.geolocation; }
@@ -26,7 +31,7 @@ export default class DistanceToAppElement extends HTMLElement {
   get #placeId () { return this.#placeField.value; }
 
   // https://www.wikihow.com/Convert-Kilometers-to-Miles
-  get #distanceMiles () { return this.#format(this.#distanceKM * 0.62137273664981); }
+  get #distanceMiles () { return formatNum(this.#distanceKM * 0.62137273664981); }
 
   connectedCallback () {
     this.#form.addEventListener('submit', (ev) => this.#submitEventHandler(ev));
@@ -37,25 +42,19 @@ export default class DistanceToAppElement extends HTMLElement {
   #submitEventHandler (ev) {
     ev.preventDefault();
 
-    this.#geolocation.watchPosition((pos) => this.#distanceCallback(pos));
+    this.#geolocation.watchPosition((pos) => this.#locationCallback(pos), (er) => this.#errorCallback(er, 'watch'), this.#opt);
 
     this.#fieldsetElem.addEventListener('change', (ev) => {
       console.log('change:', ev);
-      this.#geolocation.getCurrentPosition((pos) => this.#distanceCallback(pos));
+      this.#geolocation.getCurrentPosition((pos) => this.#locationCallback(pos), (er) => this.#errorCallback(er, 'get'), this.#opt);
     });
   }
 
-  #distanceCallback (pos) {
+  #locationCallback (pos) {
     const date = new Date(pos.timestamp);
-    const { latitude, longitude } = pos.coords; // 53.777, -1.5797 -- Leeds.
-    const fromLatlng = new LatLng([latitude, longitude]);
+    const { fromLatlng, distance } = this.#calculateDistance(pos);
 
-    // const placeID = this.#placeField.value;
-    const toLatlng = new LatLng(this.#getLatLng(this.#placeId));
-
-    const distanceM = fromLatlng.distanceTo(toLatlng);
-    this.#distanceKM = this.#format(distanceM / 1000);
-    // WAS: const distanceKM = calculateDistance(fromLatlng, toLatlng);
+    this.#distanceKM = formatNum(distance / 1000);
 
     this.#outputElem.value = `${this.#distanceKM} km (${this.#distanceMiles} miles) to ${this.#placeLabel}`;
 
@@ -65,11 +64,30 @@ export default class DistanceToAppElement extends HTMLElement {
     console.log('coords:', this.#distanceKM, 'km', this.#placeId, fromLatlng, date, pos);
   }
 
+  #errorCallback (error, source) {
+    const { code, message } = error;
+    console.error('Geolocation Error:', code, source, message);
+
+    this.dataset.errorCode = code;
+    this.dataset.errorMessage = message;
+  }
+
+  #calculateDistance (geoPos) {
+    const { latitude, longitude } = geoPos.coords; // 53.777, -1.5797 -- Leeds.
+    const fromLatlng = new LatLng([latitude, longitude]);
+    // const placeID = this.#placeField.value;
+    const toLatlng = new LatLng(this.#getLatLng(this.#placeId));
+
+    const distance = fromLatlng.distanceTo(toLatlng);
+
+    return { fromLatlng, toLatlng, distance };
+  }
+
   #setSpeedHeading (pos) {
     const { heading, speed } = pos.coords;
 
-    this.#headingElem.value = heading ?? '?'; // degrees; 0deg == North.
-    this.#speedElem.value = speed ?? '?'; // m/s.
+    this.#headingElem.value = `${formatNum(heading)}°` ?? '?'; // degrees; 0deg == North.
+    this.#speedElem.value = formatNum(speed) ?? '?'; // m/s.
   }
 
   #runTimer (intervalMS = 1000) {
@@ -96,7 +114,7 @@ export default class DistanceToAppElement extends HTMLElement {
 
   /** @DEPRECATED https://www.mathsisfun.com/algebra/distance-2-points.html
   */
-  #calculateDistance (fromLatlng, toLatlng) {
+  #oldCalculateDistance2D (fromLatlng, toLatlng) {
     const [xa, ya] = fromLatlng;
     const [xb, yb] = toLatlng;
 
@@ -109,10 +127,10 @@ export default class DistanceToAppElement extends HTMLElement {
   #factorKM () {
     return 214.06 / 1.9205730502321912;
   }
+}
 
-  #format (number) {
-    return new Intl.NumberFormat('en-GB', { maximumFractionDigits: 2 }).format(
-      number
-    );
-  }
+export function formatNum (number, maximumFractionDigits = 2) {
+  return new Intl.NumberFormat('en-GB', { maximumFractionDigits }).format(
+    number
+  );
 }

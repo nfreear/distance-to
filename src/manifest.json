@@ -1,6 +1,6 @@
 {
   "name": "Distance To App",
-  "description": "What is the distance to \"XX\" from my current location?",
+  "description": "What is the distance to \"X\" from my current location?",
   "display": "standalone",
   "icons": [
     {

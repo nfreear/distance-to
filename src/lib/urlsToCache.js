@@ -10,8 +10,10 @@ export default function urlsToCache () {
     resolve('../leaflet/geo/crs/EarthCRS.js'),
     resolve('../data/gbr-place-data.js'),
     resolve('../style/app.css'),
+    // resolve('../style/my-compass.css'),
     resolve('./DistanceToAppElement.js'),
     resolve('./LoadPlaceDataElement.js'),
+    resolve('./WakeLockElement.js'),
     resolve('./app.js'),
     resolve('./icon.svg'),
     import.meta.url

@@ -6,7 +6,8 @@
 
 fieldset {
   border: 1px dotted gray;
-  padding: 0;
+  border-radius: .25rem;
+  padding: 1px;
 
   .display-flex {
     display: flex;
@@ -32,6 +33,11 @@ fieldset {
       margin-left: .2rem;
     }
   }
+
+  [ type = radio ] {
+    height: 1rem;
+    width: 1rem;
+  }
 }
 
 output {
@@ -51,6 +57,14 @@ form {
   }
 }
 
+details {
+  margin: 2rem 0;
+
+  summary {
+    padding: .5rem 0;
+  }
+}
+
 footer {
   border-top: 1px solid gray;
   margin-top: 2rem;
@@ -66,7 +80,7 @@ body {
   color: var(--fore-color);
   font-family: sans-serif;
   margin: auto;
-  max-width: 34rem;
+  max-width: 44rem;
   padding: 0 1rem;
 
   a[ href ] {
@@ -74,7 +88,32 @@ body {
   }
 }
 
+::part(input),
 * {
   outline-offset: .2rem;
   text-underline-offset: .2rem;
+}
+
+wake-lock {
+  &::part(labelText) {
+    display: inline-block;
+    margin: .2rem;
+  }
+
+  &::part(label) {
+    padding: .5rem 0;
+  }
+
+  &::part(checkbox) {
+    height: 1rem;
+    width: 1rem;
+  }
+}
+
+.sr-only,
+.visually-hidden {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  position: absolute;
 }

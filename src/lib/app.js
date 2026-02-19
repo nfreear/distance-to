@@ -6,12 +6,14 @@
 
 import DistanceToAppElement from './DistanceToAppElement.js';
 import LoadPlaceDataElement from './LoadPlaceDataElement.js';
+import WakeLockElement from './WakeLockElement.js';
 
 const { confirm, customElements } = window;
 const deleteButton = document.querySelector('#deleteButton');
 
 customElements.define('distance-to-app', DistanceToAppElement);
 customElements.define('load-place-data', LoadPlaceDataElement);
+customElements.define('wake-lock', WakeLockElement);
 
 document.documentElement.classList.remove('no-js');
 document.documentElement.classList.add('js');

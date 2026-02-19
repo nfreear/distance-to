@@ -13,6 +13,8 @@
   <h1>Distance To …?</h1>
 </header>
 
+<wake-lock></wake-lock>
+
 <distance-to-app role="main">
 
 <form id="formID">
@@ -23,13 +25,16 @@
     <output name="timer" aria-live="off"></output>
   </p>
 
+  <details name="sec" open>
+    <summary>Places</summary>
   <fieldset name="fs">
-    <legend>Places</legend>
+    <legend class="sr-only">Places</legend>
 
     <load-place-data class="display-flex">
       Loading …
     </load-place-data>
   </fieldset>
+  </details>
 
   <p><button name="startButton">Start</button></p>
 </form>

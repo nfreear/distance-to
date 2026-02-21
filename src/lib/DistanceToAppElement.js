@@ -4,7 +4,9 @@ import geoData from '../data/gbr-place-data.js';
 const { HTMLElement, navigator } = window;
 
 /**
+ * Web App to display the distance to X from your current location.
  *
+ * @copyright © 2026 Nick Freear.
  * @see https://codepen.io/nfreear/pen/KwMbYwe
  */
 export default class DistanceToAppElement extends HTMLElement {

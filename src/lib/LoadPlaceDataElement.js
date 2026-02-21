@@ -4,6 +4,7 @@ const { HTMLElement } = window;
 
 /**
  * Load Geo-data and create a radio button element for each place.
+ * (No shadow DOM)
  */
 export default class LoadPlaceDataElement extends HTMLElement {
   #elements;

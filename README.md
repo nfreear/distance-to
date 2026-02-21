@@ -16,6 +16,12 @@ Uses the following:
 * [Haversine formula][].
 * [Caching][].
 
+## License
+
+* Copyright © 2026 Nick Freear.
+* [GNU General Public License 3.0][gpl]
+
+[gpl]: https://www.gnu.org/licenses/gpl-3.0.en.html
 [pen]: https://codepen.io/nfreear/pen/KwMbYwe
 [crosshair pen]: https://codepen.io/nfreear/pen/MYedwqM
 [compass pen]: https://codepen.io/nfreear/pen/PwzvNeE

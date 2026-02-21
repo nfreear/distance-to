@@ -1,12 +1,18 @@
 const { HTMLElement, navigator } = window;
 
+/**
+ * Use a checkbox to control the Screen Wake Lock API, to prevent devices
+ * from dimming or locking the screen (uses Shadow DOM).
+ * @copyright © 2026 Nick Freear.
+ */
 export default class WakeLockElement extends HTMLElement {
+  #label = 'Stay awake';
+  #inputElem;
   #outputElem;
   #wakeLock = null;
 
   get #supportsWakeLock () { return 'wakeLock' in navigator; }
 
-  get #label () { return this.getAttribute('label') ?? 'Stay awake'; }
   get #successText () { return this.getAttribute('success-text') ?? 'Wake lock is active!'; }
   get #releaseText () { return this.getAttribute('release-text') ?? 'Wake lock released!'; }
 
@@ -22,6 +28,7 @@ export default class WakeLockElement extends HTMLElement {
 
     input.addEventListener('change', (ev) => this.#changeEventHandler(ev));
 
+    this.#inputElem = input;
     this.#outputElem = output;
 
     console.debug('wake-lock:', [this]);
@@ -29,18 +36,13 @@ export default class WakeLockElement extends HTMLElement {
 
   #changeEventHandler (ev) {
     if (ev.target.checked) {
-      this.#acquireWakeLock(ev);
+      this.#acquireLock(ev);
     } else {
-      this.#wakeLock.release().then(() => {
-        this.#wakeLock = null;
-        this.#outputElem.textContent = this.#releaseText;
-        this.dataset.active = false;
-        console.debug('Wake lock released', ev);
-      });
+      this.#releaseLock(ev);
     }
   }
 
-  async #acquireWakeLock (ev) {
+  async #acquireLock (ev) {
     try {
       this.#wakeLock = await navigator.wakeLock.request('screen');
       this.#outputElem.textContent = this.#successText;
@@ -49,8 +51,18 @@ export default class WakeLockElement extends HTMLElement {
     } catch (err) {
       // The Wake Lock request has failed - usually system related, such as battery.
       this.#outputElem.textContent = `${err.name}, ${err.message}`;
+      this.dataset.error = err;
       console.error('WakeLock Error:', err);
     }
+  }
+
+  #releaseLock (ev) {
+    this.#wakeLock.release().then(() => {
+      this.#wakeLock = null;
+      this.#outputElem.textContent = this.#releaseText;
+      this.dataset.active = false;
+      console.debug('Wake lock released', ev);
+    });
   }
 
   #createElements () {
@@ -58,17 +70,19 @@ export default class WakeLockElement extends HTMLElement {
     const label = document.createElement('label');
     const span = document.createElement('span');
     const output = document.createElement('output');
+    const slot = document.createElement('slot');
 
     input.type = 'checkbox';
     input.setAttribute('part', 'checkbox');
     output.setAttribute('part', 'output');
     label.setAttribute('part', 'label');
     span.setAttribute('part', 'labelText');
-    span.textContent = this.#label;
+    slot.textContent = this.#label;
 
     label.appendChild(input);
     label.appendChild(span);
     label.appendChild(output);
+    span.appendChild(slot);
 
     return { label, input, output };
   }

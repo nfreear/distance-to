@@ -6,7 +6,7 @@ const { HTMLElement, navigator } = window;
  * @copyright © 2026 Nick Freear.
  */
 export default class WakeLockElement extends HTMLElement {
-  #label = 'Stay awake';
+  #defaultLabel = 'Stay awake';
   #inputElem;
   #outputElem;
   #wakeLock = null;
@@ -77,7 +77,7 @@ export default class WakeLockElement extends HTMLElement {
     output.setAttribute('part', 'output');
     label.setAttribute('part', 'label');
     span.setAttribute('part', 'labelText');
-    slot.textContent = this.#label;
+    slot.textContent = this.#defaultLabel;
 
     label.appendChild(input);
     label.appendChild(span);

@@ -2,7 +2,7 @@
 
 # Distance To …?
 
-What is the distance to [_X_] from my current location?
+> What is the distance to "_X_" from my current location?
 
 A minimalist [progressive web app][] to answer this question, designed for offline use and for when the mobile signal is poor.
 

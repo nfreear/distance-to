@@ -1,3 +1,5 @@
+@import 'version.css';
+
 :root {
   --back-color: #222;
   --fore-color: #eee;
@@ -49,8 +51,11 @@ output {
 }
 
 [ data-success = false ] {
-  &::before {
+  [ name = output ]::before {
     content: '⚠️';
+    display: inline-block;
+    font-size: x-large;
+    margin-right: .5rem;
   }
 
   output {

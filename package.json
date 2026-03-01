@@ -5,7 +5,10 @@
     "servor": "^4.0.2"
   },
   "scripts": {
-    "start": "cd src && npx servor",
+    "build": "npm run version:css",
+    "start": "npm run build && cd src && npx servor",
+    "version:js": "node ./scripts/version.js > ./src/lib/version.js",
+    "version:css": "node ./scripts/version.js --css > ./src/style/version.css",
     "lint": "npx eslint",
     "lint:fix": "npx eslint --fix ./src/leaflet/"
   },

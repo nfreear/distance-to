@@ -1,6 +1,7 @@
 const { confirm, HTMLElement } = window;
 
 export default class DeleteCacheButtonElement extends HTMLElement {
+  #defaultSlotText = 'Clear cache';
   #button;
   #callbackFN;
 
@@ -34,7 +35,7 @@ export default class DeleteCacheButtonElement extends HTMLElement {
     const buttonElem = document.createElement('button');
     const slotElem = document.createElement('slot');
 
-    slotElem.textContent = 'Clear cache';
+    slotElem.textContent = this.#defaultSlotText;
     buttonElem.setAttribute('part', 'button');
     buttonElem.appendChild(slotElem);
 

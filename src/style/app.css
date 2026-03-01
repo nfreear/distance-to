@@ -48,6 +48,16 @@ output {
   }
 }
 
+[ data-success = false ] {
+  &::before {
+    content: '⚠️';
+  }
+
+  output {
+    font-size: medium;
+  }
+}
+
 form {
   font-size: x-large;
 
@@ -69,9 +79,12 @@ footer {
   border-top: 1px solid gray;
   margin-top: 2rem;
 
-  button {
+  delete-cache-button {
     margin-left: .6rem;
-    padding: .15rem .5rem;
+
+    &::part(button) {
+      padding: .15rem .5rem;
+    }
   }
 }
 
@@ -88,6 +101,7 @@ body {
   }
 }
 
+::part(button),
 ::part(input),
 * {
   outline-offset: .2rem;

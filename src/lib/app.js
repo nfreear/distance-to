@@ -4,16 +4,20 @@
  * @copyright ©2026 Nick Freear.
  */
 
+import DeleteCacheButtonElement from './DeleteCacheButtonElement.js';
 import DistanceToAppElement from './DistanceToAppElement.js';
 import LoadPlaceDataElement from './LoadPlaceDataElement.js';
 import WakeLockElement from './WakeLockElement.js';
 
-const { confirm, customElements } = window;
-const deleteButton = document.querySelector('#deleteButton');
+const { customElements } = window;
+const serviceWorkerJS = import.meta.resolve('../service-worker.js');
+// const deleteButton = document.querySelector('#deleteButton');
+const deleteCacheButton = document.querySelector('delete-cache-button');
 
 customElements.define('distance-to-app', DistanceToAppElement);
 customElements.define('load-place-data', LoadPlaceDataElement);
 customElements.define('wake-lock', WakeLockElement);
+customElements.define('delete-cache-button', DeleteCacheButtonElement);
 
 document.documentElement.classList.remove('no-js');
 document.documentElement.classList.add('js');
@@ -25,17 +29,15 @@ document.documentElement.classList.add('js');
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js', { type: 'module' })
+    navigator.serviceWorker.register(serviceWorkerJS, { type: 'module' })
       .then((registration) => {
         registration.addEventListener('updatefound', (ev) => {
           console.debug('updatefound:', ev);
         });
 
-        deleteButton.addEventListener('click', (ev) => {
-          if (confirm('Are you sure you want to delete the cache?')) {
-            registration.active.postMessage('cache:delete');
-          }
-        });
+        deleteCacheButton.onconfirm = () => {
+          registration.active.postMessage('cache:delete');
+        };
 
         console.warn('Distance To App: service-worker.js registered OK!', registration);
       });

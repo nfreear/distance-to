@@ -11,6 +11,7 @@ export default function urlsToCache () {
     resolve('../data/gbr-place-data.js'),
     resolve('../style/app.css'),
     // resolve('../style/my-compass.css'),
+    resolve('./DeleteCacheButtonElement.js'),
     resolve('./DistanceToAppElement.js'),
     resolve('./LoadPlaceDataElement.js'),
     resolve('./WakeLockElement.js'),

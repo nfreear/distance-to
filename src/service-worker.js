@@ -1,7 +1,7 @@
 import urlsToCache from './lib/urlsToCache.js';
 
 /**
- * Distance To App | © Nick Freear | License: GPL-3.0+.
+ * Service worker | © Nick Freear | License: GPL-3.0+.
  *
  * @see https://github.com/nfreear/breath/blob/master/docs/service-worker.js
  * @see https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker

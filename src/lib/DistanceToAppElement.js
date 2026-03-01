@@ -13,12 +13,14 @@ export default class DistanceToAppElement extends HTMLElement {
   #distanceKM;
   #timerNum = 0;
   #timerID;
-  #opt = {
-    enableHighAccuracy: false,
-    timeout: 5000,
-    maximumAge: 0,
+  // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition#options
+  #geoLocationOptions = {
+    enableHighAccuracy: false, // Default: false (save battery/time)
+    timeout: Infinity, // Default: Infinity (was: 5000)
+    maximumAge: 0, // Default: 0,
   };
 
+  get #opt () { return this.#geoLocationOptions; }
   get #geoData () { return geoData; }
   get #geolocation () { return navigator.geolocation; }
 
@@ -64,11 +66,17 @@ export default class DistanceToAppElement extends HTMLElement {
     this.#runTimer();
 
     console.log('coords:', this.#distanceKM, 'km', this.#placeId, fromLatlng, date, pos);
+
+    this.dataset.success = true;
   }
 
   #errorCallback (error, source) {
+    this.dataset.success = false;
+
     const { code, message } = error;
     console.error('Geolocation Error:', code, source, message);
+
+    this.#outputElem.value = `Geolocation Error: ${message}`;
 
     this.dataset.errorCode = code;
     this.dataset.errorMessage = message;
